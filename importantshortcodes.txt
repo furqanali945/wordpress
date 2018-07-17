@@ -1,0 +1,259 @@
+
+<!--background image way in wordpress css-->
+background-image:url(./images/phn.png);
+
+================================================================================================================================
+
+<!--for images path to folder-->
+<img src="<?php bloginfo('template_url');?>/images/logo.png">
+
+================================================================================================================================
+
+<!--for css path to folder-->
+<link href="<?php bloginfo('template_url');?>/css/style.css" rel="stylesheet">
+
+================================================================================================================================
+
+<!--for script path to folder-->
+<script src="<?php bloginfo('template_url');?>/js/owl.carousel.js"></script>
+
+================================================================================================================================
+
+<!--to get menu through php-->
+<?php wp_nav_menu( array( 'menu' => 'top-menu') ); ?> 
+
+================================================================================================================================
+
+to post dynamically
+
+
+                                                <?php
+                                                                                // The Query
+                                                                                query_posts('cat=1' );
+
+                                                                                // The Loop
+                                                                                while ( have_posts() ) : the_post();
+                                                                                                ?> 
+                                
+
+                
+   content start=(                              <!--<div class="item">
+                        
+                                  <div class="content"></div>
+                                 <div class="img1">
+                                 <?php the_post_thumbnail('full'); ?>
+                                                                                                
+                                                                                                 </div>
+                                                                                                
+                                                                                                 
+                                   </div>-->       )=content ends
+                        
+
+                        
+                                                                <?php
+                                                                endwhile;
+                                                                                                                
+                                                                // Reset Query
+                                                                wp_reset_query();
+                                                                ?>
+
+
+================================================================================================================================
+
+to post dynamically with limit
+
+                                                                <?php
+                                // The Query
+                                query_posts('cat=4&posts_per_page=3' );
+
+                                // The Loop
+                                while ( have_posts() ) : the_post();
+                                                ?>
+
+
+
+   content start=(                              <!--<div class="item">
+                        
+                                  <div class="content"></div>
+                                 <div class="img1">
+                                 <?php the_post_thumbnail('full'); ?>
+                                                                                                
+                                                                                                 </div>
+                                                                                                
+                                                                                                 
+                                   </div>-->       )=content ends
+                                  
+
+                        
+
+
+                                                                <?php
+                                                                endwhile;
+                                                                                                                
+                                                                // Reset Query
+                                                                wp_reset_query();
+                                                                ?>
+
+
+
+================================================================================================================================
+
+to post page dynamically
+
+
+<?php
+// The Query
+query_posts('page_id=136' );
+
+// The Loop
+while ( have_posts() ) : the_post();
+?>
+
+
+
+                ( content )
+
+
+<?php
+endwhile;
+                                                
+// Reset Query
+wp_reset_query();
+?>
+
+
+                                                
+               
+================================================================================================================================
+
+dynamically data call codes
+
+
+<?php the_post_thumbnail('full'); ?> for images
+
+<?php the_excerpt(); ?> for dynamic read more
+<?php the_content(); ?> for content
+<?php the_title(); ?> for title
+
+<?php echo substr(get_the_excerpt(), 0,90); ?> for custom readmore
+
+
+================================================================================================================================
+
+image tag  in dynamic slider  <?php the_post_thumbnail('full'); ?> 
+
+================================================================================================================================
+
+<!--to open the link on a new window-->
+<a href=”!important;” target=”_blank”></a>
+
+================================================================================================================================
+
+meta code through which mobile responsive will work on devices
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+
+html5 tag through which mobile responsive will work on devices
+
+   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+================================================================================================================================
+
+site url
+<?php echo site_url(); ?>
+
+================================================================================================================================
+
+font awesome link url
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+================================================================================================================================
+
+short code call php script
+<?php echo do_shortcode( '[contact-form-7 id="1234" title="Contact form 1"]' ); ?>
+
+================================================================================================================================
+
+to call a widget
+<?php dynamic_sidebar('mail-sub-widget-area' ); ?>
+
+================================================================================================================================
+
+to show mail subscriber
+<?php eemail_show(); ?>
+
+================================================================================================================================
+
+media query
+@media only screen and (max-width: 500px) { }
+
+================================================================================================================================
+
+script to show or hide any thing through id or class onclick
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+                $(document).ready(function(){
+                $("#English").hide();       
+    $("#Spanish").click(function(){
+        $("#English").show();             
+                                $("#Spanish").hide();
+    });
+                $("#English").click(function(){
+        $("#English").hide();               
+                                $("#Spanish").show();
+    });
+});
+</script>
+
+================================================================================================================================
+
+Woocommerce code to show products on any page through category
+[product_category category="shop2" per_page="2" columns="4"]
+
+================================================================================================================================
+
+Code to put cart in header, this code should be pasted in where you want cart
+
+<a class="cart-contents" href="<?php echo WC()->cart->get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>">Cart <?php echo sprintf (_n( '%d item', '%d item(s)', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?> - <?php echo WC()->cart->get_cart_total(); ?></a>
+
+
+this code should be pasted in function.php page
+
+// Ensure cart contents update when products are added to the cart via AJAX (place the following in functions.php)
+add_filter( 'woocommerce_add_to_cart_fragments', 'woocommerce_header_add_to_cart_fragment' );
+function woocommerce_header_add_to_cart_fragment( $fragments ) {
+                ob_start();
+                ?>
+                <a class="cart-contents" href="<?php echo WC()->cart->get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>">Cart <?php echo sprintf (_n( '%d item', '%d item(s)', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?> - <?php echo WC()->cart->get_cart_total(); ?></a>
+                <?php
+                
+                $fragments['a.cart-contents'] = ob_get_clean();
+                
+                return $fragments;
+                
+                }
+
+================================================================================================================================
+
+css code to call custom fonts in css
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(css/sansation_light.ttf);
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(css/sansation_light.eot);
+}
+
+================================================================================================================================
+
